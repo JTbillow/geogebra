@@ -103,7 +103,7 @@ public class GeoInputBoxTest extends BaseUnitTest {
 	}
 
 	@Test
-	public void testForComplexUndefinedGeo() {
+	public void testForDependentUndefinedGeo() {
 		add("a=1");
 		add("b=?a");
 
