@@ -2780,7 +2780,6 @@ public class AlgebraProcessor {
 		if (isExplicit) {
 			line.setToExplicit();
 		}
-		line.showUndefinedInAlgebraView(true);
 		setEquationLabelAndVisualStyle(line, label, info);
 
 		return array(line);

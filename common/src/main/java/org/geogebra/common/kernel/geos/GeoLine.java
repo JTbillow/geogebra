@@ -92,7 +92,6 @@ public class GeoLine extends GeoVec3D implements Path, Translateable,
 	public static final int EQUATION_GENERAL = 4;
 	/** user input **/
 	public static final int EQUATION_USER = 5;
-	private boolean showUndefinedInAlgebraView = false;
 
 	private String parameter = Unicode.lambda + "";
 	/** start point */
@@ -674,24 +673,6 @@ public class GeoLine extends GeoVec3D implements Path, Translateable,
 	}
 
 	@Override
-	public boolean showInAlgebraView() {
-		// independent or defined
-		// return isIndependent() || isDefined();
-
-		return isDefined() || showUndefinedInAlgebraView;
-	}
-
-	/**
-	 * Set whether this line should be visible in AV when undefined
-	 * 
-	 * @param flag
-	 *            true to show undefined
-	 */
-	public void showUndefinedInAlgebraView(boolean flag) {
-		showUndefinedInAlgebraView = flag;
-	}
-
-	@Override
 	public void set(GeoElementND geo) {
 		super.set(geo);
 
@@ -1016,17 +997,12 @@ public class GeoLine extends GeoVec3D implements Path, Translateable,
 
 		if (!coefficientsDefined() || (DoubleUtil.isZero(x) && DoubleUtil.isZero(y)
 				&& getToStringMode() != EQUATION_USER)) {
-
-			String ret = "y = ?";
-
 			if (getToStringMode() == PARAMETRIC) {
-				ret = "X = (?, ?)";
-			} else if (DoubleUtil.isZero(y)) {
+				return "X = (?, ?)";
+			} else {
 				// eg list = {x = ?}
-				ret = "x = ?";
+				return  "?";
 			}
-
-			return ret;
 		}
 
 		switch (getToStringMode()) {
